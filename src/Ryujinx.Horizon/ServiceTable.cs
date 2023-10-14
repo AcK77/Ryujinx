@@ -1,11 +1,17 @@
-using Ryujinx.Horizon.Bcat;
 using Ryujinx.Horizon.Arp;
+using Ryujinx.Horizon.Bcat;
+using Ryujinx.Horizon.Hshl;
+using Ryujinx.Horizon.Ins;
 using Ryujinx.Horizon.Lbl;
 using Ryujinx.Horizon.LogManager;
 using Ryujinx.Horizon.MmNv;
 using Ryujinx.Horizon.Ngc;
+using Ryujinx.Horizon.Ovln;
 using Ryujinx.Horizon.Prepo;
+using Ryujinx.Horizon.Psc;
 using Ryujinx.Horizon.Sdk.Arp;
+using Ryujinx.Horizon.Srepo;
+using Ryujinx.Horizon.Usb;
 using Ryujinx.Horizon.Wlan;
 using System.Collections.Generic;
 using System.Threading;
@@ -33,12 +39,18 @@ namespace Ryujinx.Horizon
 
             RegisterService<ArpMain>();
             RegisterService<BcatMain>();
+            RegisterService<HshlMain>();
+            RegisterService<InsMain>();
             RegisterService<LblMain>();
             RegisterService<LmMain>();
             RegisterService<MmNvMain>();
-            RegisterService<PrepoMain>();
-            RegisterService<WlanMain>();
             RegisterService<NgcMain>();
+            RegisterService<OvlnMain>();
+            RegisterService<PrepoMain>();
+            RegisterService<PscMain>();
+            RegisterService<SrepoMain>();
+            RegisterService<UsbMain>();
+            RegisterService<WlanMain>();
 
             _totalServices = entries.Count;
 
