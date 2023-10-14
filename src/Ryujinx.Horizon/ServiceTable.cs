@@ -1,9 +1,11 @@
 using Ryujinx.Horizon.Bcat;
+using Ryujinx.Horizon.Arp;
 using Ryujinx.Horizon.Lbl;
 using Ryujinx.Horizon.LogManager;
 using Ryujinx.Horizon.MmNv;
 using Ryujinx.Horizon.Ngc;
 using Ryujinx.Horizon.Prepo;
+using Ryujinx.Horizon.Sdk.Arp;
 using Ryujinx.Horizon.Wlan;
 using System.Collections.Generic;
 using System.Threading;
@@ -17,6 +19,9 @@ namespace Ryujinx.Horizon
 
         private readonly ManualResetEvent _servicesReadyEvent = new(false);
 
+        public IReader ArpReader { get; set; }
+        public IWriter ArpWriter { get; set; }
+
         public IEnumerable<ServiceEntry> GetServices(HorizonOptions options)
         {
             List<ServiceEntry> entries = new();
@@ -26,6 +31,7 @@ namespace Ryujinx.Horizon
                 entries.Add(new ServiceEntry(T.Main, this, options));
             }
 
+            RegisterService<ArpMain>();
             RegisterService<BcatMain>();
             RegisterService<LblMain>();
             RegisterService<LmMain>();
