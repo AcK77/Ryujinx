@@ -23,16 +23,16 @@ namespace Ryujinx.Horizon.Prepo.Ipc
             System,
         }
 
-        private readonly HeapAllocator _heapAllocator;
+        private readonly ArpApi _arp;
         private readonly PrepoServicePermissionLevel _permissionLevel;
         private ulong _systemSessionId;
 
         private bool _immediateTransmissionEnabled;
         private bool _userAgreementCheckEnabled = true;
 
-        public PrepoService(HeapAllocator heapAllocator, PrepoServicePermissionLevel permissionLevel)
+        public PrepoService(ArpApi arp, PrepoServicePermissionLevel permissionLevel)
         {
-            _heapAllocator = heapAllocator;
+            _arp = arp;
             _permissionLevel = permissionLevel;
         }
 
@@ -213,9 +213,7 @@ namespace Ryujinx.Horizon.Prepo.Ipc
                 builder.AppendLine($" ApplicationId: {applicationId}");
             }
 
-            using var arpApi = new ArpApi(_heapAllocator);
-
-            Result result = arpApi.GetApplicationInstanceId(out ulong applicationInstanceId, pid);
+            Result result = _arp.GetApplicationInstanceId(out ulong applicationInstanceId, pid);
             if (result.IsFailure)
             {
                 return PrepoResult.InvalidPid;
