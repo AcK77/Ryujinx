@@ -219,7 +219,7 @@ namespace Ryujinx.Horizon.Prepo.Ipc
                 return PrepoResult.InvalidPid;
             }
 
-            arpApi.GetApplicationLaunchProperty(out ApplicationLaunchProperty applicationLaunchProperty, applicationInstanceId).AbortOnFailure();
+            _arp.GetApplicationLaunchProperty(out ApplicationLaunchProperty applicationLaunchProperty, applicationInstanceId).AbortOnFailure();
 
             builder.AppendLine($" ApplicationVersion: {applicationLaunchProperty.Version}");
 
